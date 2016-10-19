@@ -1,5 +1,5 @@
 {
-  "name": "Average Course of Dollar in NBU",
+  "name": "Average dollar exchange rate of the NBU",
   "authors": [
     "Dmitry Borzyonok <dima.matters@gmail.com>"
   ],
@@ -7,7 +7,7 @@
   "main": "",
   "moduleType": [],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/MCMatters/avg_dollar_exchange_rate",
   "private": true,
   "ignore": [
     "**/.*",
@@ -17,7 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-datepicker": "^1.6.4",
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1"
   }

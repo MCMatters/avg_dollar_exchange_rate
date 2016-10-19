@@ -1,5 +1,5 @@
 {
-  "name": "avg_course_nbu",
+  "name": "avg_dollar_exchange_rate",
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
@@ -11,14 +11,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/MCMatters/avg_dollar_exchange_rate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MCMatters/avg_dollar_exchange_rate.git"
+  },
   "keywords": [
     "AMgrade",
-    "avearage",
+    "average",
     "NBU",
     "dollar",
     "Ukraine",
     "salary"
   ],
   "author": "Dmitry Borzyonok",
-  "license": "ISC"
+  "license": "MIT"
 }
