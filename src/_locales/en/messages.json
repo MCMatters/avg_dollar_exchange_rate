@@ -1,0 +1,11 @@
+{
+    "avg_nbu": {
+        "message": "The average exchange rate of the NBU:"
+    },
+    "avg_pb": {
+        "message": "The average exchange rate of the NBU (PrivatBank):"
+    },
+    "submit": {
+        "message": "Calculate"
+    }
+}
