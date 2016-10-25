@@ -3,3 +3,4 @@ dist/
 node_modules/
 .idea/
 .DS_Store*
+src/js/popup.min.js
