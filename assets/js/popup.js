@@ -19,7 +19,8 @@
 
         function setDefaultValueToDate() {
             const currentDate = new Date();
-            $date.value = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1);
+            const month = currentDate.getMonth() + 1;
+            $date.value = currentDate.getFullYear() + '-' + (month < 10 ? '0' + month : month);
         }
 
         function attachThrobber(el) {
