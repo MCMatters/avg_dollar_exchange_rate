@@ -17,10 +17,45 @@
             }
         }
 
-        function setDefaultValueToDate() {
+        function getTodayDate() {
             const currentDate = new Date();
             const month = currentDate.getMonth() + 1;
-            $date.value = currentDate.getFullYear() + '-' + (month < 10 ? '0' + month : month);
+            const day = currentDate.getDate();
+            return {
+                year: currentDate.getFullYear(),
+                month: month < 10 ? '0' + month : month,
+                day: day < 10 ? '0' + day : day
+            };
+        }
+
+        function responseJson(response) {
+            return response.json();
+        }
+
+        function responseText(response) {
+            return response.text();
+        }
+
+        function setDefaultValueToDate() {
+            const today = getTodayDate();
+            $date.value = today.year + '-' + today.month;
+        }
+
+        function getCurrentExchangeRates() {
+            fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&valcode=USD')
+                .then(responseJson)
+                .then((response) => {
+                    attachRate('#current-nbu', parseFloat(response[0].rate).toFixed(2));
+                });
+            fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+                .then(responseJson)
+                .then((response) => {
+                    response.forEach((rate) => {
+                        if (rate.ccy === 'USD') {
+                            attachRate('#current-pb', parseFloat(rate.sale).toFixed(2));
+                        }
+                    });
+                });
         }
 
         function attachThrobber(el) {
@@ -43,9 +78,7 @@
                 'currency=169&outer=xml&' +
                 'periodStartTime=01.' + dateString +
                 '&periodEndTime=20.' + dateString;
-            fetch(url).then(function (response) {
-                return response.text();
-            }).then(function (data) {
+            fetch(url).then(responseText).then(function (data) {
                 const parser = new DOMParser();
                 data = parser.parseFromString(data, 'text/xml');
                 const $rows = data.querySelectorAll('exchange_rate');
@@ -70,19 +103,18 @@
             }
             const placeDate = i + '.' + date[1] + '.' + date[0];
             fetch('https://api.privatbank.ua/p24api/exchange_rates?json&date=' + placeDate)
-                .then(function (response) {
-                    return response.json();
-                }).then(function (data) {
-                if (data.exchangeRate.length) {
-                    const item = data.exchangeRate.find(function (item) {
-                        return item.currency === 'USD';
-                    });
-                    sum += item.saleRateNB;
-                    counter++;
-                }
-                i++;
-                requestPrivatbank(date, sum, counter, i);
-            });
+                .then(responseJson)
+                .then(function (data) {
+                    if (data.exchangeRate.length) {
+                        const item = data.exchangeRate.find(function (item) {
+                            return item.currency === 'USD';
+                        });
+                        sum += item.saleRateNB;
+                        counter++;
+                    }
+                    i++;
+                    requestPrivatbank(date, sum, counter, i);
+                });
         }
 
         function attachFormSubmitHandler() {
@@ -97,10 +129,10 @@
         function init() {
             replaceTranslations();
             setDefaultValueToDate();
+            getCurrentExchangeRates();
             attachFormSubmitHandler();
         }
 
         init();
-
     });
 })();

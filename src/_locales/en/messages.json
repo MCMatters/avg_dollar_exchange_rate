@@ -5,6 +5,12 @@
     "avg_pb": {
         "message": "The average exchange rate of the NBU (PrivatBank):"
     },
+    "current_nbu": {
+        "message": "Current exchange rate of the NBU:"
+    },
+    "current_pb": {
+        "message": "Current exchange rate of the PrivatBank:"
+    },
     "submit": {
         "message": "Calculate"
     }
