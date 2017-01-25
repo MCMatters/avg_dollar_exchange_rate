@@ -3,16 +3,12 @@
         const $date = document.getElementById('date');
 
         function replaceTranslations() {
-            const $localizeItems = document.querySelectorAll(
-                '[data-localize], [data-value-localize]'
-            );
+            const $localizeItems = document.querySelectorAll('[data-localize]');
             for (let $item of $localizeItems) {
-                const data = $item.dataset;
-                if (data.valueLocalize) {
-                    $item.value = chrome.i18n.getMessage(data.valueLocalize);
-                }
-                if (data.localize) {
-                    $item.textContent = chrome.i18n.getMessage(data.localize);
+                const locales = $item.dataset.localize.split(',');
+                for (const locale of locales) {
+                    const localeKeys = locale.split(':');
+                    $item[localeKeys[0].trim()] = chrome.i18n.getMessage(localeKeys[1].trim());
                 }
             }
         }
@@ -41,12 +37,24 @@
             $date.value = today.year + '-' + today.month;
         }
 
-        function getCurrentExchangeRates() {
-            fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&valcode=USD')
-                .then(responseJson)
-                .then((response) => {
+        function fetchCurrentNBU(date) {
+            attachThrobber('#current-nbu');
+            let url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&valcode=USD';
+            if (date) {
+                url += '&date=' + date;
+            }
+            fetch(url).then(responseJson).then(response => {
+                if (!response.length) {
+                    date = date ? moment(date, 'YYYYMMDD') : moment();
+                    fetchCurrentNBU(date.subtract(1, 'days').format('YYYYMMDD'));
+                } else {
                     attachRate('#current-nbu', parseFloat(response[0].rate).toFixed(2));
-                });
+                }
+            });
+        }
+
+        function fetchCurrentPB() {
+            attachThrobber('#current-pb');
             fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
                 .then(responseJson)
                 .then((response) => {
@@ -56,6 +64,11 @@
                         }
                     });
                 });
+        }
+
+        function getCurrentExchangeRates() {
+            fetchCurrentNBU();
+            fetchCurrentPB();
         }
 
         function attachThrobber(el) {
@@ -101,7 +114,8 @@
                 attachRate('#avg-pb', (sum / counter).toFixed(2));
                 return;
             }
-            const placeDate = i + '.' + date[1] + '.' + date[0];
+            const day = i < 10 ? '0' + i : i;
+            const placeDate = day + '.' + date[1] + '.' + date[0];
             fetch('https://api.privatbank.ua/p24api/exchange_rates?json&date=' + placeDate)
                 .then(responseJson)
                 .then(function (data) {
@@ -117,13 +131,28 @@
                 });
         }
 
+        function requestServices() {
+            const date = $date.value.split('-');
+            requestNBU(date);
+            requestPrivatbank(date);
+        }
+
         function attachFormSubmitHandler() {
             document.forms[0].addEventListener('submit', function (e) {
                 e.preventDefault();
-                const date = $date.value.split('-');
-                requestNBU(date);
-                requestPrivatbank(date);
+                requestServices();
             });
+        }
+
+        function initTooltips() {
+            const tooltips = document.querySelectorAll('[data-toggle=tooltip]');
+            for (let i = 0; i < tooltips.length; i++) {
+                const tooltip = tooltips[i];
+                new Tooltip(tooltips[i], {
+                    placement: tooltip.dataset.placement || 'top',
+                    animation: 'slideNfade'
+                })
+            }
         }
 
         function init() {
@@ -131,6 +160,8 @@
             setDefaultValueToDate();
             getCurrentExchangeRates();
             attachFormSubmitHandler();
+            initTooltips();
+            requestServices();
         }
 
         init();

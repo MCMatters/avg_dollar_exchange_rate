@@ -1,9 +1,36 @@
 .pt-10 {
     padding-top: 10px;
 }
+
 .pb-10 {
     padding-bottom: 10px;
 }
+
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}
+
+.table-rounded,
+.table-rounded tbody tr td,
+.table-rounded tbody tr th,
+.table-rounded thead tr th,
+.table-rounded thead tr td,
+.table-rounded tfoot tr th,
+.table-rounded tfoot tr td {
+    border-radius: 3px;
+    border-collapse: separate;
+}
+
 .container {
     width: 300px;
+}
+
+.centered {
+    display: block;
+    margin: 0 auto;
 }

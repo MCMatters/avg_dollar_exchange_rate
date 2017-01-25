@@ -1,15 +1,15 @@
 {
-    "avg_nbu": {
-        "message": "Средний курс НБУ:"
+    "avg": {
+        "message": "Средний курс"
     },
-    "avg_pb": {
-        "message": "Средний курс НБУ (ПриватБанк):"
+    "current": {
+        "message": "Текщий курс"
     },
-    "current_nbu": {
-        "message": "Текущий курс НБУ:"
+    "nbu": {
+        "message": "НБУ"
     },
-    "current_pb": {
-        "message": "Текущий курс ПриватБанк:"
+    "pb": {
+        "message": "ПриватБанк"
     },
     "submit": {
         "message": "Рассчитать"

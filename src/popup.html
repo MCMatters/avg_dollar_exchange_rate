@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" src="js/vendor.js"></script>
     <script type="text/javascript" src="js/popup.min.js"></script>
 </head>
 <body>
@@ -12,28 +13,70 @@
             <input type="month" class="form-control" id="date">
         </div>
         <div class="form-group">
-            <input type="submit" data-value-localize="submit" value="" class="form-control">
+            <input type="submit" data-localize="value: submit" class="form-control btn-success">
         </div>
     </form>
+    <!--http://take.ms/xECR4-->
     <div class="panel panel-default">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <span data-localize="avg_nbu"></span>
-                <span id="avg-nbu">00.00</span>
-            </li>
-            <li class="list-group-item">
-                <span data-localize="avg_pb"></span>
-                <span id="avg-pb">00.00</span>
-            </li>
-            <li class="list-group-item">
-                <span data-localize="current_nbu"></span>
-                <span id="current-nbu">00.00</span>
-            </li>
-            <li class="list-group-item">
-                <span data-localize="current_pb"></span>
-                <span id="current-pb">00.00</span>
-            </li>
-        </ul>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <img src="images/avg.png"
+                         data-localize="alt: avg, title: avg"
+                         data-toggle="tooltip"
+                         class="centered"
+                         width="28"
+                         height="28">
+                </th>
+                <th>
+                    <img src="images/current.png"
+                         data-localize="alt: current, title: current"
+                         data-toggle="tooltip"
+                         class="centered"
+                         width="32"
+                         height="32">
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <img src="images/icon_government.png"
+                         data-localize="alt: nbu, title: nbu"
+                         data-toggle="tooltip"
+                         data-placement="left"
+                         class="centered"
+                         width="28"
+                         height="28">
+                </td>
+                <td>
+                    <div id="avg-nbu" class="text-center center-block">00.00</div>
+                </td>
+                <td>
+                    <div id="current-nbu" class="text-center center-block">00.00</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/icon_pb.png"
+                         data-localize="alt: pb, title: pb"
+                         data-toggle="tooltip"
+                         data-placement="left"
+                         class="centered"
+                         width="23"
+                         height="23">
+                </td>
+                <td>
+                    <div id="avg-pb" class="text-center center-block">00.00</div>
+                </td>
+                <td>
+                    <div id="current-pb" class="text-center center-block">00.00</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
