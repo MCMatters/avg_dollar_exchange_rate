@@ -15,11 +15,18 @@ gulp.task('js', ['js:vendor', 'js:popup']);
 
 gulp.task('js:vendor', () => {
     return gulp.src([
-        './node_modules/bootstrap.native/dist/bootstrap-native.js',
+        './node_modules/bootstrap.native/lib/utils.js',
+        './node_modules/bootstrap.native/lib/tooltip-native.js',
         './node_modules/moment/min/moment.min.js',
         './node_modules/moment/locale/ru.js'
     ])
         .pipe(concat('vendor.js'))
+        .pipe(uglify({
+            mangle: false
+        }))
+        .pipe(rename({
+            suffix: '.min'
+        }))
         .pipe(gulp.dest('./src/js'));
 });
 
