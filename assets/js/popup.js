@@ -85,6 +85,7 @@
         }
 
         function attachRate(el, rate) {
+            rate = isNaN(rate) ? 0 : rate;
             const $el = document.querySelector(el);
             $el.innerHTML = '';
             $el.textContent = rate;
@@ -111,16 +112,26 @@
         }
 
         function requestPrivatbank(date, sum, counter, i) {
+            let max = 20;
+            const today = getTodayDate();
+
+            if (today.year === parseInt(date[0]) && today.month == date[1]) {
+                max = parseInt(today.day);
+            }
+
             if (!i) {
                 attachThrobber('#avg-pb');
             }
+
             sum = sum || 0;
             i = i || 1;
             counter = counter || 0;
-            if (i > 20) {
+
+            if (i > max) {
                 attachRate('#avg-pb', toFixed(parseFloat(sum / counter), 2));
                 return;
             }
+
             const day = i < 10 ? '0' + i : i;
             const placeDate = day + '.' + date[1] + '.' + date[0];
             fetch('https://api.privatbank.ua/p24api/exchange_rates?json&date=' + placeDate)
