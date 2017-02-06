@@ -13,5 +13,14 @@
     },
     "submit": {
         "message": "Рассчитать"
+    },
+    "my_salary": {
+        "message": "Моя зарплата"
+    },
+    "how_much_get_paid": {
+        "message": "Сколько я заработаю:"
+    },
+    "salary_attention": {
+        "message": "Мы не собираем никакой информации о Вашей заработной плате"
     }
 }

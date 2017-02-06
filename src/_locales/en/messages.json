@@ -13,5 +13,14 @@
     },
     "submit": {
         "message": "Calculate"
+    },
+    "my_salary": {
+        "message": "My salary"
+    },
+    "how_much_get_paid": {
+        "message": "How much do I get paid:"
+    },
+    "salary_attention": {
+        "message": "We don't collect any information about your salary"
     }
 }

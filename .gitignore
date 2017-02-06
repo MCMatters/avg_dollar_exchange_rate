@@ -4,3 +4,7 @@ node_modules/
 .DS_Store*
 src/js/*.js
 src/css/*.css
+src/fonts/*
+!src/js/.gitkeep
+!src/css/.gitkeep
+!src/fonts/.gitkeep
