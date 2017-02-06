@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import currentMixin from '../mixins/currentMixin';
+    import currentMixin from '../../mixins/currentMixin';
     import axios from 'axios';
 
     export default {

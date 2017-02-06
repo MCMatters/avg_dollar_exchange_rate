@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import avgMixin from '../mixins/avgMixin';
+    import avgMixin from '../../mixins/avgMixin';
     import axios from 'axios';
 
     export default {

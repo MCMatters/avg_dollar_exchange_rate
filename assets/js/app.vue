@@ -62,54 +62,30 @@
                 </tbody>
             </table>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon" data-localize="textContent: my_salary"></span>
-                <input type="number" class="form-control" v-model="salary">
-                <span class="input-group-addon"
-                      data-toggle="tooltip"
-                      data-placement="left"
-                      data-localize="title: salary_attention">
-                    <i class="glyphicon glyphicon-question-sign"></i>
-                </span>
-            </div>
-            <span class="help-block" v-show="salary != 0">
-                <span data-localize="textContent: how_much_get_paid"></span>
-                <span v-html="getSalary"></span>
-            </span>
-        </div>
+        <my-salary></my-salary>
     </div>
 </template>
 
 <script>
+    import currentNbu from './components/current/nbu.vue';
+    import currentPb from './components/current/pb.vue';
+    import avgNbu from './components/avg/nbu.vue';
+    import avgPb from './components/avg/pb.vue';
     import selectDate from './components/select-date.vue';
-    import currentNbu from './components/current-nbu.vue';
-    import currentPb from './components/current-pb.vue';
-    import avgNbu from './components/avg-nbu.vue';
-    import avgPb from './components/avg-pb.vue';
+    import mySalary from './components/my-salary.vue';
 
     export default {
-        created () {
-            VueBus.$on('avgNbuChanged', avgNbuRate => {
-                this.avgNbuRate = avgNbuRate;
-            });
-        },
         mounted () {
             this.replaceTranslations();
             this.initTooltips();
         },
         components: {
-            selectDate,
             currentNbu,
             currentPb,
             avgNbu,
-            avgPb
-        },
-        data () {
-            return {
-                avgNbuRate: 0,
-                salary: 0
-            };
+            avgPb,
+            selectDate,
+            mySalary
         },
         methods: {
             replaceTranslations () {
@@ -125,7 +101,6 @@
             },
             initTooltips () {
                 const $tooltips = document.querySelectorAll('[data-toggle=tooltip]');
-                console.log($tooltips);
                 for (let i = 0; i < $tooltips.length; i++) {
                     const tooltip = $tooltips[i];
                     new Tooltip($tooltips[i], {
@@ -133,11 +108,6 @@
                         animation: 'slideNfade'
                     })
                 }
-            }
-        },
-        computed: {
-            getSalary () {
-                return parseFloat(this.salary) * this.avgNbuRate;
             }
         }
     };

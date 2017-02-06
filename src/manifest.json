@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Average dollar exchange rate of the NBU",
   "description": "Shows average average dollar exchange rate of the NBU by month from the first day of the month on the twentieth day",
-  "version": "1.0",
+  "version": "1.0.1",
   "browser_action": {
     "default_title": "Average dollar exchange rate of the NBU",
     "default_popup": "popup.html"
