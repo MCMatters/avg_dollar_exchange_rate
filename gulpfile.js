@@ -1,12 +1,18 @@
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
+const del = require('del');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
+const runSequence = require('run-sequence').use(gulp);
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
 const webpack2 = require('webpack');
 const zip = require('gulp-zip');
+
+gulp.task('clean', () => {
+  return del.sync(['./src/css/**.css', './src/js/**.js'])
+});
 
 gulp.task('compile', () => {
   return gulp.src('./src/**')
@@ -18,11 +24,16 @@ gulp.task('css', ['css:vendor', 'css:app']);
 
 gulp.task('css:vendor', () => {
   return gulp.src([
-    './node_modules/bootstrap/dist/css/bootstrap.min.css'
+    './assets/vendor/bootstrap/css/bootstrap.min.css',
+    './node_modules/balloon-css/balloon.min.css'
   ])
     .pipe(concat('vendor.css'))
     .pipe(cleanCSS({
-      keepSpecialComments: 0
+      level: {
+        1: {
+          specialComments: 0
+        }
+      }
     }))
     .pipe(gulp.dest('./src/css'));
 });
@@ -34,23 +45,7 @@ gulp.task('css:app', () => {
     .pipe(gulp.dest('./src/css'));
 });
 
-gulp.task('js', ['js:vendor', 'js:app']);
-
-gulp.task('js:vendor', () => {
-  return gulp.src([
-    './node_modules/bootstrap.native/lib/utils.js',
-    './node_modules/bootstrap.native/lib/tooltip-native.js',
-    './node_modules/moment/min/moment.min.js',
-    './node_modules/moment/locale/ru.js'
-  ])
-    .pipe(concat('vendor.min.js'))
-    .pipe(uglify({
-      mangle: false
-    }))
-    .pipe(gulp.dest('./src/js'));
-});
-
-gulp.task('js:app', () => {
+gulp.task('js', () => {
   return gulp.src('./assets/js/main.js')
     .pipe(webpack({
       module: {
@@ -66,25 +61,25 @@ gulp.task('js:app', () => {
           },
         ]
       },
+      plugins: [
+        new webpack2.DefinePlugin({
+          'process.env': {
+            NODE_ENV: '"production"'
+          }
+        })
+      ]
     }, webpack2))
     .pipe(uglify())
     .pipe(rename({
-      basename: 'popup',
+      basename: 'app',
       suffix: '.min'
     }))
     .pipe(gulp.dest('./src/js'));
 });
 
-gulp.task('fonts', ['fonts:vendor']);
-
-gulp.task('fonts:vendor', () => {
-  return gulp.src([
-    './node_modules/bootstrap/dist/fonts/**'
-  ])
-    .pipe(gulp.dest('./src/fonts'));
+gulp.task('default', (cb) => {
+  runSequence('clean', 'css', 'js', 'compile', cb);
 });
-
-gulp.task('default', ['css', 'js', 'fonts', 'compile']);
 
 gulp.task('watch', () => {
   gulp.watch('./assets/scss/**/*.scss', ['css:app']);

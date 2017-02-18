@@ -6,6 +6,7 @@ export default {
       return Math.floor(num * fixed) / fixed;
     },
     attachRate (rate) {
+      rate = parseFloat(rate);
       rate = isNaN(rate) ? 0 : rate;
       this.value = this.toFixed(rate, 2);
     }

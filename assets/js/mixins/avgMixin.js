@@ -5,8 +5,8 @@ import throbberMethods from '../mixins/throbberMethods';
 export default {
   mixins: [currencyMethods, dateMethods, throbberMethods],
   created () {
-    const today = this.getTodayDate();
-    this.fetchValue([today.year, today.month]);
+    const now = this.getNowDate();
+    this.fetchValue([now.year, now.month]);
     VueBus.$on('dateChanged', date => {
       this.fetchValue(date);
     });
