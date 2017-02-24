@@ -12,14 +12,15 @@ export default {
       };
     },
     getMaxDay (date) {
+      const maxDay = 20;
       const now = this.getNowDate();
       const [year, month] = date;
 
       if (now.year === parseInt(year) && now.month == month) {
-        return parseInt(now.day);
+        return Math.min(maxDay, parseInt(now.day));
       }
 
-      return 20;
+      return maxDay;
     },
     wrapDateItem (item) {
       return item < 10 ? '0' + item : item;

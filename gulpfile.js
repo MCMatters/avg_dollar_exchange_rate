@@ -83,5 +83,5 @@ gulp.task('default', (cb) => {
 
 gulp.task('watch', () => {
   gulp.watch('./assets/scss/**/*.scss', ['css:app']);
-  gulp.watch(['./assets/js/**/*.js', './assets/js/**/*.vue'], ['js:app']);
+  gulp.watch(['./assets/js/**/*.js', './assets/js/**/*.vue'], ['js']);
 });
