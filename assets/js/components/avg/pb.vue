@@ -1,5 +1,10 @@
 <template>
-  <div class="text-center center-block" v-html="value"></div>
+  <div class="text-center center-block"
+       data-balloon-pos="right"
+       data-balloon-length="fit"
+       v-trans="{ dataBalloon: 'avg_pb' }"
+       v-html="value">
+  </div>
 </template>
 
 <script>
@@ -23,7 +28,7 @@
         const day = this.wrapDateItem(i);
         const placeDate = day + '.' + date[1] + '.' + date[0];
         axios.get(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${placeDate}`)
-          .then(({data}) => {
+          .then(({ data }) => {
             if (data.exchangeRate.length) {
               const item = data.exchangeRate.find(item => item.currency === 'USD');
               sum += item.saleRateNB;

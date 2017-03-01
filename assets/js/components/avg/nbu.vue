@@ -1,5 +1,10 @@
 <template>
-  <div class="text-center center-block" v-html="value"></div>
+  <div class="text-center center-block"
+       data-balloon-pos="right"
+       data-balloon-length="fit"
+       v-trans="{ dataBalloon: 'avg_nbu' }"
+       v-html="value">
+  </div>
 </template>
 
 <script>
@@ -20,7 +25,7 @@
           'periodStartTime=01.' + dateString +
           '&periodEndTime=' + this.getMaxDay(date) + '.' + dateString;
 
-        axios.get(url).then(({data}) => {
+        axios.get(url).then(({ data }) => {
           const parser = new DOMParser();
           const parsedData = parser.parseFromString(data, 'text/xml');
           const $rows = parsedData.querySelectorAll('exchange_rate');

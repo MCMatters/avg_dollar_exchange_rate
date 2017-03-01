@@ -11,6 +11,12 @@
     "pb": {
         "message": "PrivatBank"
     },
+    "avg_nbu": {
+        "message": "The average rate of the NBU from 1 to 20 for the days when the NBU has exhibited a new rate"
+    },
+    "avg_pb": {
+        "message": "The average rate of the NBU from 1 to 20 for each day"
+    },
     "submit": {
         "message": "Calculate"
     },

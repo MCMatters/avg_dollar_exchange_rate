@@ -18,7 +18,7 @@
         }
 
         this.attachThrobber();
-        axios.get(url).then(({data}) => {
+        axios.get(url).then(({ data }) => {
           if (!data.length) {
             this.fetchValue(this.getDate(date));
           } else {

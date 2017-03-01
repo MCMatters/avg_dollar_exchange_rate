@@ -14,7 +14,7 @@
         const url = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
 
         this.attachThrobber();
-        axios.get(url).then(({data}) => {
+        axios.get(url).then(({ data }) => {
           data.forEach(rate => {
             if (rate.ccy === 'USD') {
               this.attachRate(rate.sale);
