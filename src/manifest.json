@@ -19,5 +19,6 @@
     "https://*/*"
   ],
   "offline_enabled": false,
-  "default_locale": "ru"
+  "default_locale": "ru",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }
