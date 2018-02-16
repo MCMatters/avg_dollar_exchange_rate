@@ -5,7 +5,6 @@
 <script>
   import currentMixin from '../../mixins/currentMixin';
   import dateMethods from '../../mixins/dateMethods';
-  import axios from 'axios';
 
   export default {
     name: 'current-pb',
@@ -18,12 +17,14 @@
         }
 
         this.attachThrobber();
-        axios.get(url).then(({ data }) => {
-          if (!data.length) {
-            this.fetchValue(this.getDate(date));
-          } else {
-            this.attachRate(data[0].rate);
-          }
+        fetch(url)
+          .then(response => response.json())
+          .then(response => {
+            if (!response.length) {
+              this.fetchValue(this.getDate(date));
+            } else {
+              this.attachRate(response[0].rate);
+            }
         }).catch(() => {
           this.attachRate(0);
         });

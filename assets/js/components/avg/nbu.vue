@@ -9,11 +9,12 @@
 
 <script>
   import avgMixin from '../../mixins/avgMixin';
-  import axios from 'axios';
 
   export default {
     name: 'avg-nbu',
-    mixins: [avgMixin],
+    mixins: [
+      avgMixin,
+    ],
     methods: {
       fetchValue (date) {
         this.attachThrobber();
@@ -25,18 +26,20 @@
           'periodStartTime=01.' + dateString +
           '&periodEndTime=' + this.getMaxDay(date) + '.' + dateString;
 
-        axios.get(url).then(({ data }) => {
-          const parser = new DOMParser();
-          const parsedData = parser.parseFromString(data, 'text/xml');
-          const $rows = parsedData.querySelectorAll('exchange_rate');
-          let sum = 0;
+        fetch(url)
+          .then(response => response.text())
+          .then(response => {
+            const parser = new DOMParser();
+            const parsedData = parser.parseFromString(response, 'text/xml');
+            const $rows = parsedData.querySelectorAll('exchange_rate');
+            let sum = 0;
 
-          for (const $row of $rows) {
-            sum += parseFloat($row.textContent.trim());
-          }
+            for (const $row of $rows) {
+              sum += parseFloat($row.textContent.trim());
+            }
 
-          this.attachRate(parseFloat(sum / $rows.length) / 100);
-          VueBus.$emit('avgNbuChanged', this.value);
+            this.attachRate(parseFloat(sum / $rows.length) / 100);
+            VueBus.$emit('avgNbuChanged', this.value);
         }).catch(() => {
           this.attachRate(0);
         });

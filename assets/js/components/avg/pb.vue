@@ -9,7 +9,6 @@
 
 <script>
   import avgMixin from '../../mixins/avgMixin';
-  import axios from 'axios';
 
   export default {
     name: 'avg-pb',
@@ -27,10 +26,11 @@
 
         const day = this.wrapDateItem(i);
         const placeDate = day + '.' + date[1] + '.' + date[0];
-        axios.get(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${placeDate}`)
-          .then(({ data }) => {
-            if (data.exchangeRate.length) {
-              const item = data.exchangeRate.find(item => item.currency === 'USD');
+        fetch(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${placeDate}`)
+          .then(response => response.json())
+          .then(response => {
+            if (response.exchangeRate.length) {
+              const item = response.exchangeRate.find(item => item.currency === 'USD');
               sum += item.saleRateNB;
               counter++;
             }
