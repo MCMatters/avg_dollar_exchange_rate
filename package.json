@@ -1,36 +1,4 @@
 {
-    "name": "avg_dollar_exchange_rate",
-    "version": "1.0.0",
-    "main": "gulpfile.js",
-    "dependencies": {
-        "balloon-css": "0.5.0",
-        "vue": "2.5.13"
-    },
-    "devDependencies": {
-        "babel-core": "^6.22.1",
-        "babel-loader": "7.1.2",
-        "babel-preset-env": "1.6.1",
-        "css-loader": "0.28.9",
-        "del": "3.0.0",
-        "file-loader": "1.1.6",
-        "gulp": "^3.9.1",
-        "gulp-clean-css": "3.9.2",
-        "gulp-concat": "^2.6.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^3.1.0",
-        "gulp-shell": "0.6.5",
-        "gulp-uglify": "3.0.0",
-        "gulp-zip": "4.1.0",
-        "run-sequence": "2.2.1",
-        "vue-loader": "14.1.1",
-        "vue-template-compiler": "2.5.13",
-        "webpack": "3.11.0",
-        "webpack-stream": "4.0.1"
-    },
-    "scripts": {
-        "build": "gulp",
-        "watch": "gulp watch"
-    },
     "homepage": "https://github.com/MCMatters/avg_dollar_exchange_rate",
     "repository": {
         "type": "git",
@@ -45,5 +13,31 @@
         "salary"
     ],
     "author": "Dmitry Borzyonok",
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors",
+        "watch": "webpack --progress --hide-modules --colors --watch"
+    },
+    "dependencies": {
+        "balloon-css": "0.4.0",
+        "bootstrap": "^4.0.0",
+        "vue": "2.5.13"
+    },
+    "devDependencies": {
+        "babel-core": "^6.22.1",
+        "babel-loader": "7.1.2",
+        "babel-preset-env": "1.6.1",
+        "clean-webpack-plugin": "^0.1.18",
+        "cross-env": "5.1.3",
+        "css-loader": "^0.28.9",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "file-loader": "1.1.6",
+        "node-sass": "^4.7.2",
+        "optimize-css-assets-webpack-plugin": "^3.2.0",
+        "path": "^0.12.7",
+        "sass-loader": "^6.0.6",
+        "vue-loader": "14.1.1",
+        "vue-template-compiler": "2.5.13",
+        "webpack": "3.11.0"
+    }
 }

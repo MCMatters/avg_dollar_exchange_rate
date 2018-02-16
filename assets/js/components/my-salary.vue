@@ -1,11 +1,13 @@
 <template>
   <div class="form-group">
     <div class="input-group">
-      <span class="input-group-addon"
-            data-balloon-pos="right"
-            data-balloon-length="fit"
-            v-trans="{ textContent: 'my_salary', dataBalloon: 'salary_attention' }">
-      </span>
+      <div class="input-group-prepend">
+        <span class="input-group-text"
+              data-balloon-pos="right"
+              data-balloon-length="fit"
+              v-trans="{ textContent: 'my_salary', dataBalloon: 'salary_attention' }">
+        </span>
+      </div>
       <input type="text" class="form-control" v-model="salary" v-number>
     </div>
     <span class="help-block" v-show="getSalary != 0">

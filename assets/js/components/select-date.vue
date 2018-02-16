@@ -5,7 +5,7 @@
     </div>
     <div class="form-group">
       <input type="submit"
-             class="form-control btn-success"
+             class="btn-block btn btn-outline-success"
              v-trans="{ value: 'submit' }"
              @click.prevent="submitForm">
     </div>
@@ -16,7 +16,6 @@
   import dateMethods from '../mixins/dateMethods';
 
   export default {
-    name: 'select-date',
     mixins: [dateMethods],
     data () {
       return {
