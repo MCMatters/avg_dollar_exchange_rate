@@ -1,6 +1,6 @@
-import currencyMethods from '../mixins/currencyMethods';
-import dateMethods from '../mixins/dateMethods';
-import throbberMethods from '../mixins/throbberMethods';
+import currencyMethods from './currencyMethods';
+import dateMethods from './dateMethods';
+import throbberMethods from './throbberMethods';
 
 export default {
   mixins: [currencyMethods, dateMethods, throbberMethods],

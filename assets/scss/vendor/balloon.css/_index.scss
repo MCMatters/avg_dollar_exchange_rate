@@ -1,0 +1,5 @@
+@import "~balloon-css/balloon";
+
+[data-balloon-length=fit][data-balloon-pos=right]:after {
+  width: 150%;
+}

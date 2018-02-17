@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ZipFilesPlugin = require('webpack-zip-files-plugin');
 
 module.exports = {
   entry: {
@@ -69,6 +70,16 @@ module.exports = {
           removeAll: true,
         },
       },
+    }),
+    new ZipFilesPlugin({
+      entries: [
+        {
+          src: path.join(__dirname, './src'),
+          dist: './',
+        },
+      ],
+      output: path.join(__dirname, './dist/extension'),
+      format: 'zip',
     }),
   ]
 };

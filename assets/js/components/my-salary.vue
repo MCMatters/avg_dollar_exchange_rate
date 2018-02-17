@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <div class="input-group">
+    <div class="input-group pb-5">
       <div class="input-group-prepend">
         <span class="input-group-text"
               data-balloon-pos="right"

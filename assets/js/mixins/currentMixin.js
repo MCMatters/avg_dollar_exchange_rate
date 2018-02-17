@@ -1,5 +1,5 @@
-import currencyMethods from '../mixins/currencyMethods';
-import throbberMethods from '../mixins/throbberMethods';
+import currencyMethods from './currencyMethods';
+import throbberMethods from './throbberMethods';
 
 export default {
   mixins: [currencyMethods, throbberMethods],

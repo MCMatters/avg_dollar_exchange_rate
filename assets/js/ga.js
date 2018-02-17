@@ -5,7 +5,7 @@ const _gaq = _gaq || [];
 _gaq.push(['_setAccount', code]);
 _gaq.push(['_trackPageview']);
 
-(function() {
+(() => {
   const ga = document.createElement('script');
   ga.type = 'text/javascript';
   ga.async = true;
