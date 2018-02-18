@@ -73,7 +73,7 @@ module.exports = {
     }),
     new ShellPlugin({
       onBuildEnd: [
-        'zip -r -X dist/extension.zip ./src',
+        'zip -r dist/extension.zip ./src -x "*.git*" -x "*.DS_Store"',
       ],
     }),
   ]
