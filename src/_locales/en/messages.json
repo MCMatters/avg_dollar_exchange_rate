@@ -23,8 +23,8 @@
     "my_salary": {
         "message": "My salary"
     },
-    "how_much_get_paid": {
-        "message": "How much do I get paid:"
+    "how_much_i_will_earn": {
+        "message": "How much I will earn:"
     },
     "salary_attention": {
         "message": "We don't collect any information about your salary"

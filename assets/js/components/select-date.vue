@@ -24,12 +24,12 @@
     },
     methods: {
       submitForm () {
-        VueBus.$emit('dateChanged', String(this.date).split('-'));
+        VueBus.$emit('dateChanged', this.parseDate(new Date(this.date)));
       },
       getDefaultValue () {
         const now = this.getNowDate();
 
-        return now.year + '-' + now.month;
+        return `${now.year}-${now.month}`;
       }
     },
     computed: {
@@ -38,11 +38,11 @@
       },
       minDate () {
         const now = new Date();
-        now.setFullYear(now.getFullYear() - 1);
-
         const month = now.getMonth();
 
-        return now.getFullYear() + '-' + this.wrapDateItem(month);
+        now.setFullYear(now.getFullYear() - 1);
+
+        return `${now.getFullYear()}-${this.wrapDateItem(month)}`;
       }
     }
   }

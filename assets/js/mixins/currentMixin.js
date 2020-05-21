@@ -8,7 +8,7 @@ export default {
   },
   data () {
     return {
-      value: '00.00'
+      value: '00.00',
     };
   },
 }

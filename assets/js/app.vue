@@ -25,17 +25,6 @@
           <current-nbu></current-nbu>
         </td>
       </tr>
-      <tr>
-        <td v-trans="{ dataBalloon: 'pb' }">
-          <img src="images/icon_pb.png" class="centered" width="23" height="23">
-        </td>
-        <td>
-          <avg-pb></avg-pb>
-        </td>
-        <td>
-          <current-pb></current-pb>
-        </td>
-      </tr>
       </tbody>
     </table>
     <my-salary></my-salary>
@@ -44,9 +33,7 @@
 
 <script>
   import currentNbu from './components/current/nbu.vue';
-  import currentPb from './components/current/pb.vue';
   import avgNbu from './components/avg/nbu.vue';
-  import avgPb from './components/avg/pb.vue';
   import selectDate from './components/select-date.vue';
   import mySalary from './components/my-salary.vue';
   require('./directives/trans');
@@ -57,9 +44,7 @@
     },
     components: {
       currentNbu,
-      currentPb,
       avgNbu,
-      avgPb,
       selectDate,
       mySalary
     }

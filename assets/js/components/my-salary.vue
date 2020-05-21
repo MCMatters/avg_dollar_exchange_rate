@@ -10,8 +10,8 @@
       </div>
       <input type="text" class="form-control" v-model="salary" v-number>
     </div>
-    <span class="help-block" v-show="getSalary != 0">
-      <span v-trans="{ textContent: 'how_much_get_paid' }"></span>
+    <span class="help-block" v-show="getSalary !== 0">
+      <span v-trans="{ textContent: 'how_much_i_will_earn' }"></span>
       <span v-html="getSalary"></span>
     </span>
   </div>
@@ -30,14 +30,15 @@
     data () {
       return {
         avgNbuRate: null,
-        salary: null
+        salary: null,
       };
     },
     computed: {
       getSalary () {
         const salary = this.toFixed(parseFloat(this.salary) * this.avgNbuRate, 2);
+
         return isNaN(salary) ? 0 : salary;
-      }
-    }
+      },
+    },
   };
 </script>

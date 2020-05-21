@@ -1,29 +1,30 @@
 export default {
   methods: {
-    getNowDate () {
-      const currentDate = new Date();
-      const month = currentDate.getMonth() + 1;
-      const day = currentDate.getDate();
+    parseDate(date) {
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
 
       return {
-        year: currentDate.getFullYear(),
+        year: date.getFullYear(),
         month: this.wrapDateItem(month),
         day: this.wrapDateItem(day)
       };
     },
+    getNowDate () {
+      return this.parseDate(new Date());
+    },
     getMaxDay (date) {
       const maxDay = 20;
       const now = this.getNowDate();
-      const [year, month] = date;
 
-      if (now.year === parseInt(year) && now.month == month) {
+      if (now.year === parseInt(date.year) && now.month === date.month) {
         return Math.min(maxDay, parseInt(now.day));
       }
 
       return maxDay;
     },
     wrapDateItem (item) {
-      return item < 10 ? '0' + item : item;
-    }
-  }
+      return item < 10 ? `0${item}` : item;
+    },
+  },
 };

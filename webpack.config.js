@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ShellPlugin = require('webpack-shell-plugin');
 
-module.exports = {
+const config = {
   entry: {
     'js/app.js': './assets/js/main.js',
     'css/app.css': './assets/scss/app.scss',
@@ -47,6 +47,14 @@ module.exports = {
       './src/js/*.js',
     ]),
     new ExtractTextPlugin('[name]'),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+    }),
+  ]
+};
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
@@ -61,9 +69,6 @@ module.exports = {
         comments: false,
       },
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
         discardComments: {
@@ -76,5 +81,7 @@ module.exports = {
         'zip -r dist/extension.zip ./src -x "*.git*" -x "*.DS_Store"',
       ],
     }),
-  ]
-};
+  );
+}
+
+module.exports = config;

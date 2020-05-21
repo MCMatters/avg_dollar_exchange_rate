@@ -12,14 +12,16 @@
     methods: {
       fetchValue (date) {
         let url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&valcode=USD';
+
         if (date) {
-          url += '&date=' + date;
+          url += `&date=${date}`;
         }
 
         this.attachThrobber();
+
         fetch(url)
-          .then(response => response.json())
-          .then(response => {
+          .then((response) => response.json())
+          .then((response) => {
             if (!response.length) {
               this.fetchValue(this.getDate(date));
             } else {
@@ -36,7 +38,7 @@
         const month = date.getMonth() + 1;
         const day = date.getDate();
 
-        return date.getFullYear() + this.wrapDateItem(month) + this.wrapDateItem(day);
+        return `${date.getFullYear()}${this.wrapDateItem(month)}${this.wrapDateItem(day)}`;
       }
     }
   }

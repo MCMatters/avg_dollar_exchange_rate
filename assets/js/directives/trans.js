@@ -6,6 +6,7 @@ Vue.directive('trans', {
       if (!binding.value.hasOwnProperty(attribute)) {
         continue;
       }
+
       const kebabCaseAttribute = attribute.toKebabCase();
       const translation = chrome.i18n.getMessage(binding.value[attribute]);
 

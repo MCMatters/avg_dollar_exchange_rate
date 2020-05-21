@@ -3,7 +3,8 @@ import Vue from 'vue';
 Vue.directive('number', {
   inserted (el) {
     const handleInput = (e) => {
-      if ((e.key === '.' && String(el.value).indexOf('.') !== -1) ||
+      if (
+        (e.key === '.' && String(el.value).indexOf('.') !== -1) ||
         !/^(\d+|\.)$/.test(e.key)
       ) {
         e.preventDefault();
@@ -13,7 +14,7 @@ Vue.directive('number', {
     el.addEventListener('keypress', handleInput);
     el.addEventListener('keyup', handleInput);
 
-    el.addEventListener('paste', e => {
+    el.addEventListener('paste', (e) => {
       e.preventDefault();
     });
   }

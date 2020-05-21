@@ -17,32 +17,19 @@
     ],
     methods: {
       fetchValue (date) {
-        this.attachThrobber();
+        this.fetchValues(
+          date,
+          (day, month, year) => {
+            const url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&date=';
+            const dateString = `${year}${month}${this.wrapDateItem(day)}`;
 
-        const dateString = date[1] + '.' + date[0];
-        const url = 'http://www.bank.gov.ua/control/uk/curmetal/' +
-          'currency/search?formType=searchPeriodForm&time_step=daily&' +
-          'currency=169&outer=xml&' +
-          'periodStartTime=01.' + dateString +
-          '&periodEndTime=' + this.getMaxDay(date) + '.' + dateString;
-
-        fetch(url)
-          .then(response => response.text())
-          .then(response => {
-            const parser = new DOMParser();
-            const parsedData = parser.parseFromString(response, 'text/xml');
-            const $rows = parsedData.querySelectorAll('exchange_rate');
-            let sum = 0;
-
-            for (const $row of $rows) {
-              sum += parseFloat($row.textContent.trim());
-            }
-
-            this.attachRate(parseFloat(sum / $rows.length) / 100);
-            VueBus.$emit('avgNbuChanged', this.value);
-        }).catch(() => {
-          this.attachRate(0);
-        });
+            return `${url}${dateString}&json`;
+          },
+          (responses) => Promise.all(responses.map((response) => response[0].rate)),
+          (rate) => {
+            VueBus.$emit('avgNbuChanged', rate);
+          },
+        );
       }
     }
   }
